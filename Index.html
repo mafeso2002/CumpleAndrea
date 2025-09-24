@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>¡Cumple sorpresa 50!</title>
+  <meta name="description" content="Invitación – Cumple sorpresa 50"/>
+
+  <style>
+    @font-face{
+      font-family:"Nomixa";
+      src: url("Nomixa-VF.ttf") format("truetype-variations");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face{
+      font-family:"DMSerifDisplay";
+      src: url("DMSerifDisplay-Italic.ttf") format("truetype");
+      font-weight: 400;
+      font-style: italic;
+      font-display: swap;
+    }
+
+    :root{
+      --bg: #fff9ee;
+      --gold-1:#e3c35b; --gold-2:#caa12a;
+      --text:#2b2b2b;
+      --card-shadow: 0 16px 40px rgba(0,0,0,.16);
+      --radius: 16px;
+
+      /* variantes de oliva para las tarjetas */
+      --olive-light-1:#a4932f; --olive-light-2:#806f1b;
+      --olive-dark-1:#5a5118;  --olive-dark-2:#3f3911;
+
+      --title-gold:#f1d86a;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0; padding:0; background:var(--bg); color:var(--text); font-family:"Nomixa", system-ui, Arial;}
+    img{max-width:100%; display:block}
+    a{color:inherit; text-decoration:none}
+    .container{width:min(1080px,92%); margin-inline:auto}
+    .btn{display:inline-block; padding:.9rem 1.2rem; border-radius:999px; font-weight:800; letter-spacing:.2px; background:linear-gradient(180deg,var(--gold-1),var(--gold-2)); color:#2b2205; box-shadow:var(--card-shadow); cursor:pointer;}
+    .btn-ghost{background:transparent; border:2px solid var(--gold-2); color:var(--gold-2); font-weight:800; border-radius:999px; padding:.6rem 1rem; cursor:pointer;}
+
+    /* ========= HERO ========= */
+    header.hero{
+      position:relative; overflow:hidden; min-height: 90vh;
+      display:grid; place-items:center; text-align:center;
+      background:
+        url('bg_header.webp') top center/cover no-repeat,
+        linear-gradient(180deg, #fffef8 0, var(--bg) 100%);
+    }
+    .hero .inner{position:relative; padding: 3.6rem 1rem 2.2rem}
+    .title-img{width:min(660px, 86%); margin: .2em auto .4em; filter: drop-shadow(0 10px 24px rgba(0,0,0,.2));}
+    .sub{font-family:"DMSerifDisplay", serif; font-style:italic; font-size:clamp(1.15rem,2.5vw,1.6rem); color:#685515}
+    .secret{color:#6c5a1d; margin-top:.55rem; font-size:clamp(.92rem, 1.7vw, 1rem)}
+
+    /* ====== FOTO POLAROID tal cual ====== */
+    .polaroid{
+      position:absolute; left:min(5.5vw, 70px); top: clamp(30px, 7vw, 100px);
+      width:min(420px, 60vw);
+      transform: rotate(-6deg);
+      z-index:2;
+    }
+    .polaroid img{width:100%; height:auto; display:block;}
+
+    /* globos laterales del hero */
+    .glob-left{position:absolute; left:0; top:52%; width:min(170px, 26vw); transform: translate(-20%, -50%); pointer-events:none;}
+    .glob-right{position:absolute; right:0; top:55%; width:min(170px, 26vw); transform: translate(20%, -50%); pointer-events:none;}
+
+    /* curva separadora */
+    .curve{
+      position:absolute; inset:auto 0 0 0; height:110px; background:linear-gradient(180deg, transparent 0%, #fff 40%, #fff 100%);
+      -webkit-mask: radial-gradient(50% 110px at 50% 0, #000 99%, transparent 101%);
+              mask: radial-gradient(50% 110px at 50% 0, #000 99%, transparent 101%);
+    }
+
+    /* ========== TARJETAS (como el diseño) ========== */
+    section.cards{ position:relative; padding: 32px 0; }
+    .balloons-l{ position:absolute; left:350px; top:-60px; width:120px; filter: drop-shadow(0 12px 24px rgba(0,0,0,.25)); pointer-events:none;}
+    .balloons-r{ position:absolute; right:350px; top:-60px; width:120px; filter: drop-shadow(0 12px 24px rgba(0,0,0,.25)); pointer-events:none;}
+
+    .grid{display:grid; gap:22px; grid-template-columns: repeat(2,1fr)}
+    @media (max-width:840px){ .grid{grid-template-columns:1fr} }
+
+    .card{
+      color:#f6e9b3; padding:1.4rem; border-radius: 18px; box-shadow:var(--card-shadow);
+      border: 1px solid rgba(255,255,255,.06);
+      min-height: 230px; display:flex; flex-direction:column; justify-content:center;
+    }
+    .card-light{ background: linear-gradient(180deg, var(--olive-light-1) 0%, var(--olive-light-2) 100%); }
+    .card-dark{  background: linear-gradient(180deg, var(--olive-dark-1)  0%, var(--olive-dark-2)  100%); }
+
+    .card h3{
+      font-family:"DMSerifDisplay", serif; font-style:italic; font-weight:400;
+      color:var(--title-gold); text-align:center; margin:.2rem 0 1rem; font-size: clamp(1.3rem,2.4vw,1.6rem);
+    }
+    .card .icon{width:44px; height:auto; margin: 0 auto 10px; opacity:.95}
+    .card p{margin:.35rem 0; line-height:1.25; color:#fff; text-align:center}
+    .card small{opacity:.85}
+    .card .action{margin-top:.8rem; display:block; text-align:center; color:var(--title-gold); opacity:.9; font-size:.95rem; cursor:pointer;}
+
+    .mini{display:grid; grid-template-columns:1fr 1fr; gap:22px}
+    @media (max-width:840px){ .mini{grid-template-columns:1fr} }
+
+    /* ========== ASISTENCIA ========== */
+    .rsvp-wrap{margin-top:34px}
+    .rsvp{
+      background: linear-gradient(180deg, var(--olive-light-1) 0%, var(--olive-light-2) 100%);
+      color:#f7f2d2;
+      padding: 1.8rem;
+      border-radius: 20px;
+      box-shadow: 0 18px 48px rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .rsvp h3{
+      text-align:center;
+      font-family:"DMSerifDisplay",serif;
+      font-style:italic;
+      font-weight:400;
+      color: var(--title-gold);
+      margin:.2rem 0 .5rem;
+      letter-spacing:.2px;
+    }
+    .hint{
+      text-align:center;
+      color:#fff3cc;
+      font-size:.95rem;
+      opacity:.95;
+      font-family:"DMSerifDisplay", serif;
+      font-style:italic;
+      margin:.1rem 0 1.1rem;
+    }
+    .rsvp .hint::before{content:"/ ";}
+    .rsvp .hint::after{content:" /";}
+
+    form .row{display:grid; gap:16px; grid-template-columns:1fr 1fr}
+    @media (max-width:680px){ form .row{grid-template-columns:1fr} }
+    label{display:block; font-weight:800; margin-bottom:.4rem; letter-spacing:.2px; color:#fff3cc}
+    input[type="text"], select{
+      width:100%; padding:.9rem 1rem; border-radius:12px;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.12);
+      color:#fff; outline:none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
+      font-family:"Nomixa", system-ui;
+    }
+    input::placeholder{color:rgba(255,255,255,.85)}
+    .radio{
+      display:flex; align-items:center; gap:24px;
+      padding:.6rem 0 1.05rem;
+      line-height:1.2;
+      color:#fff;
+    }
+    .radio > span{margin-right:8px; opacity:.98}
+    .radio label{display:inline-flex; align-items:center; gap:8px; font-weight:700;}
+
+    /* Botón */
+    .submit{
+      display:block; margin: 20px auto 8px;
+      width:min(520px, 92%);
+      padding: 1rem 1.2rem;
+      border-radius:12px;
+      background:#d9bd24;
+      color:#ffffff;
+      border:none;
+      box-shadow: 0 1px 0 rgba(0,0,0,.35) inset, 0 10px 22px rgba(0,0,0,.18);
+      font-weight:800; letter-spacing:.2px;
+      cursor:pointer;            /* << manito */
+    }
+    .submit:hover{filter:brightness(1.03)}
+
+    /* Número 1..5 */
+    input[type="number"]{
+      width: 96px;
+      padding:.6rem .8rem;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.25);
+      background:#ffffff;
+      color:#2b2b2b;
+      font-weight:700;
+      box-shadow: inset 0 1px 0 rgba(0,0,0,.05);
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button{ opacity:1; }
+
+    /* Footer */
+    footer{ display:none; }
+
+    /* === REGALITO === */
+    .card.gift{ position: relative; background:#a99012; color:#f9edbd; }
+    .card.gift h3{ color:#f1d86a; margin:.2rem 0 1rem; }
+    .card.gift .icon{ position:relative; display:inline-block; vertical-align:middle; margin-right:8px; width:22px; height:auto; opacity:.95; }
+    .card.gift p,.card.gift .action{ text-align:center; }
+    .card.gift .lead{ margin-top:.15rem; }
+    .card.gift .kv small{ color:#e9d98a; }
+    .card.gift .kv strong#alias{ color:#cfe1ff; font-style:italic; }
+    .card.gift .kv strong#cbu{ color:#ffffff; }
+    .card.gift .holder{ color:#e9d98a; font-style:italic; }
+    .card.gift .action{ color:#e9efc6; }
+
+    /* Superposición tarjeta Asistencia sobre el footer */
+    .rsvp-wrap{ position:relative; z-index:3; }
+    .rsvp{ box-shadow: 0 22px 40px rgba(0,0,0,.35), 0 2px 0 rgba(255,255,255,.12) inset; }
+
+    /* FOOTER FINAL */
+    .footer-hero{
+      position: relative;
+      z-index: 1;
+      margin-top: -180px;
+      padding: 260px 0 0;
+      background: url('bg_footer_full.webp') top center / cover no-repeat;
+      overflow: hidden;
+      min-height: 640px;
+    }
+    .footer-hero .big50img{ display:none !important; }
+    .footer-hero .back-top{
+      position: relative;
+      display:block;
+      padding: 20px 0 40px;
+      text-align:center;
+      color:#f6f0cf; font-weight:700; text-decoration:none; font-size:1rem; opacity:.95;
+      cursor:pointer;           /* manito en link “Volver arriba” */
+    }
+    .footer-hero .back-top:hover{ opacity:1; text-decoration:underline; }
+  </style>
+</head>
+<body>
+
+  <!-- ====== FOTO POLAROID ====== -->
+  <div class="polaroid">
+    <img src="img_flaca.webp" alt="Foto de la homenajeada">
+  </div>
+
+  <!-- globos laterales del hero -->
+  <img class="glob-left" src="glob_01.webp" alt="" aria-hidden="true">
+  <img class="glob-right" src="glob_02.webp" alt="" aria-hidden="true">
+
+  <!-- =================== HERO =================== -->
+  <header class="hero">
+    <div class="inner container">
+      <img class="title-img" src="cumple_sorpresa.webp" alt="¡Cumple sorpresa!">
+      <p class="sub">¡La flaca cumple 50 y la queremos sorprender!</p>
+      <p class="secret">(No metas la pata 🙊🙈🙉 <b>…es secreto</b>)</p>
+      <img src="50num.webp" alt="50" style="width:min(420px,70%); margin: 14px auto 0;">
+    </div>
+    <div class="curve" aria-hidden="true"></div>
+  </header>
+
+  <!-- =================== BLOQUES PRINCIPALES =================== -->
+  <section class="cards" id="detalles">
+    <!-- Globos que abrazan las tarjetas -->
+    <img class="balloons-l" src="glob_01.webp" alt="" aria-hidden="true">
+    <img class="balloons-r" src="glob_02.webp" alt="" aria-hidden="true">
+
+    <div class="container">
+      <div class="grid">
+        <!-- ¿Cuándo? -->
+        <div class="card card-light">
+          <img class="icon" src="icon_fecha.webp" alt="Icono calendario">
+          <h3>¿Cuándo?</h3>
+          <p><strong>Sábado 18 de Octubre de 2025</strong>, a las <strong>20:45 h</strong> (¡puntual!).</p>
+          <a class="action" id="addToCal" href="#">› Agendar evento</a>
+        </div>
+
+        <!-- ¿Dónde? -->
+        <div class="card card-dark">
+          <img class="icon" src="icon_ubi.webp" alt="Icono ubicación">
+          <h3>¿Dónde?</h3>
+          <p><strong>Salón MG</strong><br/>Lamadrid 2728, Las Heras</p>
+          <a class="action" id="mapsLink" target="_blank" rel="noreferrer noopener">› Ver en Google maps</a>
+        </div>
+      </div>
+
+      <div class="mini" style="margin-top:22px">
+        <!-- Bebidas -->
+        <div class="card card-dark">
+          <img class="icon" src="icon_bebidas.webp" alt="Icono bebidas">
+          <h3>Bebidas</h3>
+          <p>Te pedimos que <strong>traigas lo que vas a tomar</strong><br/>(El chupi 🥂🍻🍷).</p>
+        </div>
+
+        <!-- Regalito -->
+        <div class="card card-light gift" id="regalito">
+          <h3>Regalito</h3>
+          <p class="lead"><img class="icon" src="icon_colab.webp" alt="Icono regalo"> Si querés hacerle una pequeña atención podés hacerlo acá 😊</p>
+          <p class="kv">
+            <small>Alias:</small> <strong id="alias">cumpleflaca50</strong><br/>
+            <small>CBU:</small> <strong id="cbu">453000000501588732942</strong><br/>
+            <em class="holder"><small>Titular:</small> Guillermo Sosa (El Puppo)</em>
+          </p>
+          <a class="action" id="copyCbuBtn" href="#">› Copiar CBU</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== ASISTENCIA =================== -->
+  <div class="container">
+    <div class="rsvp-wrap">
+      <section class="rsvp">
+        <h3>Asistencia</h3>
+        <p class="hint">Confirmá tu asistencia antes del <strong>10 de octubre</strong></p>
+
+        <!-- FORM con validaciones -->
+        <form id="rsvpForm"
+              action="https://docs.google.com/forms/d/e/1FAIpQLScQHpPU0iYqd6bCsbHqCa_R-Kx_lEen3FBgNmoVlFC1mYR0LA/formResponse"
+              method="POST" target="_self" novalidate>
+          <div class="row">
+            <div>
+              <label for="nombre">Nombre*</label>
+              <input id="nombre" name="entry.1788264235" type="text" required
+                     placeholder="Tu nombre" autocomplete="given-name"
+                     pattern=".*\\S.*" />
+            </div>
+            <div>
+              <label for="apellido">Apellido*</label>
+              <input id="apellido" name="entry.1367845071" type="text" required
+                     placeholder="Tu apellido" autocomplete="family-name"
+                     pattern=".*\\S.*" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label class="sr-only">¿Venís?</label>
+              <div class="radio">
+                <span>¿Venís?</span>
+                <label><input type="radio" name="entry.501006349" value="Si" required checked> Estoy :)</label>
+                <label><input type="radio" name="entry.501006349" value="No"> No puedo :(</label>
+              </div>
+            </div>
+            <div>
+              <label for="extrasNumber">¿Cuántas personas más vienen con vos?</label>
+              <!-- Por pedido: default 1 y mínimo 1 -->
+              <input id="extrasNumber" name="entry.2142209110" type="number" min="1" max="5" step="1"
+                     value="1" inputmode="numeric" />
+            </div>
+          </div>
+
+          <button class="btn submit" type="submit">Confirmar asistencia</button>
+        </form>
+
+      </section>
+    </div>
+  </div>
+
+  <!-- =================== BLOQUE FINAL =================== -->
+  <section class="footer-hero" aria-label="Decoración 50 años">
+    <div class="container">
+      <img class="big50img" src="footer_img.webp" alt="50">
+    </div>
+    <a class="back-top" href="#detalles">Volver arriba</a>
+  </section>
+
+  <script>
+    const CONFIG = {
+      event: {
+        title: "Cumple sorpresa 50",
+        start: "2025-10-18T20:45:00",
+        end:   "2025-10-18T23:59:00",
+        whereText: "Salón MG, Lamadrid 2728, Las Heras",
+        mapsLink: "https://www.google.com/maps/search/?api=1&query=Lamadrid+2728+Las+Heras",
+        description: "¡Sorpresa! No metas la pata 🙊🙈🙉"
+      },
+      money: {
+        alias: "cumpleflaca50",
+        cbu:   "453000000501588732942"
+      }
+    };
+
+    // Links dinámicos
+    document.getElementById("mapsLink").href = CONFIG.event.mapsLink;
+    document.getElementById("alias").textContent = CONFIG.money.alias;
+    document.getElementById("cbu").textContent   = CONFIG.money.cbu;
+
+    // Copiar CBU
+    const copyCBU = ()=> {
+      const cbuNumber = CONFIG.money.cbu;
+      navigator.clipboard?.writeText(cbuNumber).then(()=>alert("Copiado: " + cbuNumber));
+    };
+    document.getElementById("copyCbuBtn").addEventListener("click",(e)=>{e.preventDefault(); copyCBU();});
+
+    // Agregar a calendario (ICS)
+    document.getElementById("addToCal").addEventListener("click", (e)=>{
+      e.preventDefault();
+      const dt = (s)=> s.replace(/[-:]/g,"").replace(".000Z","");
+      const ics = [
+        "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Invitacion Cumple//ES",
+        "BEGIN:VEVENT",
+        "DTSTAMP:" + dt(new Date().toISOString()),
+        "DTSTART:" + dt(CONFIG.event.start),
+        "DTEND:"   + dt(CONFIG.event.end),
+        "SUMMARY:" + CONFIG.event.title,
+        "LOCATION:" + CONFIG.event.whereText,
+        "DESCRIPTION:" + CONFIG.event.description,
+        "END:VEVENT","END:VCALENDAR"
+      ].join("\r\n");
+      const blob = new Blob([ics], {type:"text/calendar"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = "cumple-50.ics"; document.body.appendChild(a); a.click();
+      setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 400);
+    });
+
+    // === VALIDACIONES Nombre/Apellido y envío ===
+    const form = document.getElementById("rsvpForm");
+    const nombre = document.getElementById("nombre");
+    const apellido = document.getElementById("apellido");
+
+    const validateNotBlank = (el, label) => {
+      const v = (el.value || "").trim();
+      if (!v) {
+        el.setCustomValidity(`Ingresá tu ${label}.`);
+        return false;
+      }
+      el.setCustomValidity("");
+      return true;
+    };
+
+    ["input","blur"].forEach(evt=>{
+      nombre.addEventListener(evt, ()=>validateNotBlank(nombre,"nombre"));
+      apellido.addEventListener(evt, ()=>validateNotBlank(apellido,"apellido"));
+    });
+
+    form.addEventListener("submit", (e)=>{
+      // Normaliza espacios y valida
+      nombre.value = (nombre.value || "").trim();
+      apellido.value = (apellido.value || "").trim();
+
+      const okNombre = validateNotBlank(nombre,"nombre");
+      const okApellido = validateNotBlank(apellido,"apellido");
+
+      if (!okNombre || !okApellido) {
+        e.preventDefault();
+        // Dispara el UI nativo del browser
+        form.reportValidity();
+      }
+      // Si todo ok, el form envía a Google Forms como está configurado.
+    });
+  </script>
+</body>
+</html>
