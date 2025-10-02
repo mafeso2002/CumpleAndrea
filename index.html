@@ -323,25 +323,7 @@
     ["input","blur"].forEach(evt=>{nombre.addEventListener(evt,()=>validateNotBlank(nombre,"nombre"));apellido.addEventListener(evt,()=>validateNotBlank(apellido,"apellido"))});
 
     // Stepper
-     (()=>{
-    const w = document.querySelector(".stepper"),
-          inc = w.querySelector(".inc"),
-          dec = w.querySelector(".dec"),
-          input = w.querySelector("input[type='number']");
-
-    const min = parseInt(w.dataset.min ?? input.min ?? "0", 10);
-    const max = parseInt(w.dataset.max ?? input.max ?? "5", 10);
-
-    const clamp = v => Math.min(max, Math.max(min, v));
-    const set = v => { input.value = clamp(Number.isNaN(v) ? min : v); };
-
-    inc.addEventListener("click", () => set(parseInt(input.value,10) + 1));
-    dec.addEventListener("click", () => set(parseInt(input.value,10) - 1));
-    input.addEventListener("input", () => set(parseInt(input.value,10)));
-
-    set(parseInt(input.value,10));
-  })();
-
+     (()=>{const w=document.querySelector(".stepper"),inc=w.querySelector(".inc"),dec=w.querySelector(".dec"),input=w.querySelector("input[type='number']");const min=parseInt(w.dataset.min||input.min||"1",10),max=parseInt(w.dataset.max||input.max||"5",10);const clamp=v=>Math.min(max,Math.max(min,v));const set=v=>{input.value=clamp(v)};inc.addEventListener("click",()=>set(parseInt(input.value||"1",10)+1));dec.addEventListener("click",()=>set(parseInt(input.value||"1",10)-1));input.addEventListener("input",()=>set(parseInt(input.value||"1",10)));set(parseInt(input.value||"1",10))})();
     form.addEventListener("submit",e=>{nombre.value=(nombre.value||"").trim();apellido.value=(apellido.value||"").trim();const okN=validateNotBlank(nombre,"nombre"),okA=validateNotBlank(apellido,"apellido");if(!okN||!okA){e.preventDefault();form.reportValidity()}});
   </script>
 </body>
