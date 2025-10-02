@@ -108,7 +108,7 @@
     /* 👉 Alineación del stepper en DESKTOP: centrado dentro de la 2ª columna */
     @media (min-width:681px){
       .row > div:last-child{display:flex;flex-direction:column;align-items:center}
-      .row > div:last-child .stepper{margin:0} /* lo centra por align-items del contenedor */
+      .row > div:last-child .stepper{margin:0}
     }
 
     footer{display:none}
@@ -154,7 +154,7 @@
 
   <!-- =================== HERO =================== -->
   <header class="hero">
-    <!-- ===== Countdown dentro del header ===== -->
+    <!-- ===== Countdown ===== -->
     <div id="countdown" class="countdown" aria-live="polite">
       <div class="title">Faltan</div>
       <div class="cd-grid" aria-hidden="true">
@@ -196,31 +196,27 @@
         </div>
 
         <div class="card card-dark">
-  <img class="icon" src="icon_ubi.webp" alt="Icono ubicación">
-  <h3>¿Dónde?</h3>
-  <p><strong>Salón MG</strong><br/>Lamadrid 2778, Las Heras</p>
-  
-  <!-- NUEVO BLOQUE DE CARACTERÍSTICAS -->
-  <div style="margin-top:10px; text-align:center;">
-    <p style="margin:.3rem 0; display:flex; align-items:center; justify-content:center; gap:8px; color:#fff;">
-      <img src="icon_parking.webp" alt="Icono estacionamiento" style="width:22px; height:auto;"> 
-      Estacionamiento propio
-    </p>
-    <p style="margin:.3rem 0; display:flex; align-items:center; justify-content:center; gap:8px; color:#fff;">
-      <img src="icon_seguridad.webp" alt="Icono seguridad" style="width:22px; height:auto;"> 
-      Seguridad
-    </p>
-  </div>
-  <!-- FIN DEL BLOQUE NUEVO -->
-
-  <a class="action" id="mapsLink" target="_blank" rel="noreferrer noopener">
-    › Ver en Google Maps
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M14 3h7v7M10 14 21 3M21 14v7H3V3h7" 
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </a>
-</div>
+          <img class="icon" src="icon_ubi.webp" alt="Icono ubicación">
+          <h3>¿Dónde?</h3>
+          <p><strong>Salón MG</strong><br/>Lamadrid 2778, Las Heras</p>
+          <div style="margin-top:10px; text-align:center;">
+            <p style="margin:.3rem 0; display:flex; align-items:center; justify-content:center; gap:8px; color:#fff;">
+              <img src="icon_parking.webp" alt="Icono estacionamiento" style="width:22px; height:auto;"> 
+              Estacionamiento propio
+            </p>
+            <p style="margin:.3rem 0; display:flex; align-items:center; justify-content:center; gap:8px; color:#fff;">
+              <img src="icon_seguridad.webp" alt="Icono seguridad" style="width:22px; height:auto;"> 
+              Seguridad
+            </p>
+          </div>
+          <a class="action" id="mapsLink" target="_blank" rel="noreferrer noopener">
+            › Ver en Google Maps
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 3h7v7M10 14 21 3M21 14v7H3V3h7" 
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
       </div>
 
       <div class="mini" style="margin-top:22px">
@@ -273,7 +269,7 @@
             </div>
             <div>
               <label for="extras">¿Cuántas personas más vienen con vos?</label>
-              <div class="stepper" data-min="1" data-max="5">
+              <div class="stepper" data-min="0" data-max="5">
                 <button type="button" class="dec" aria-label="Restar">−</button>
                 <input id="extras" name="entry.2142209110" type="number" inputmode="numeric" min="0" max="5" step="1" value="0"/>
                 <button type="button" class="inc" aria-label="Sumar">+</button>
@@ -323,7 +319,7 @@
     ["input","blur"].forEach(evt=>{nombre.addEventListener(evt,()=>validateNotBlank(nombre,"nombre"));apellido.addEventListener(evt,()=>validateNotBlank(apellido,"apellido"))});
 
     // Stepper
-     (()=>{const w=document.querySelector(".stepper"),inc=w.querySelector(".inc"),dec=w.querySelector(".dec"),input=w.querySelector("input[type='number']");const min=parseInt(w.dataset.min||input.min||"1",10),max=parseInt(w.dataset.max||input.max||"5",10);const clamp=v=>Math.min(max,Math.max(min,v));const set=v=>{input.value=clamp(v)};inc.addEventListener("click",()=>set(parseInt(input.value||"1",10)+1));dec.addEventListener("click",()=>set(parseInt(input.value||"1",10)-1));input.addEventListener("input",()=>set(parseInt(input.value||"1",10)));set(parseInt(input.value||"1",10))})();
+     (()=>{const w=document.querySelector(".stepper"),inc=w.querySelector(".inc"),dec=w.querySelector(".dec"),input=w.querySelector("input[type='number']");const min=parseInt(w.dataset.min||input.min||"0",10),max=parseInt(w.dataset.max||input.max||"5",10);const clamp=v=>Math.min(max,Math.max(min,v));const set=v=>{input.value=clamp(v)};inc.addEventListener("click",()=>set(parseInt(input.value||"0",10)+1));dec.addEventListener("click",()=>set(parseInt(input.value||"0",10)-1));input.addEventListener("input",()=>set(parseInt(input.value||"0",10)));set(parseInt(input.value||"0",10))})();
     form.addEventListener("submit",e=>{nombre.value=(nombre.value||"").trim();apellido.value=(apellido.value||"").trim();const okN=validateNotBlank(nombre,"nombre"),okA=validateNotBlank(apellido,"apellido");if(!okN||!okA){e.preventDefault();form.reportValidity()}});
   </script>
 </body>
