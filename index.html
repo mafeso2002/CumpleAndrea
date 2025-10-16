@@ -53,7 +53,6 @@
       width:300px;max-width:90vw;background:#fff;border-radius:999px;padding:14px 16px;
       box-shadow:0 16px 40px rgba(0,0,0,.18);z-index:5;text-align:center;
     }
-    .countdown::before{content:none!important}
     .countdown .title{font-family:"DMSerifDisplay",serif;font-style:italic;color:#90721b;font-size:1.2rem;margin:.1rem 0 .4rem}
     .cd-grid{display:grid;grid-template-columns:repeat(7,auto);align-items:center;justify-content:center;gap:10px}
     .cd-col{min-width:44px}
@@ -62,7 +61,7 @@
     .cd-sep{width:1px;height:28px;background:#d9c37a;opacity:.8}
 
     /* ========== Secciones ========== */
-    section.cards{position:relative;padding:32px 0}
+    section.cards{position:relative;z-index:2;padding:32px 0}
     .balloons-l{position:absolute;left:350px;top:-60px;width:120px;filter:drop-shadow(0 12px 24px rgba(0,0,0,.25));pointer-events:none}
     .balloons-r{position:absolute;right:350px;top:-60px;width:120px;filter:drop-shadow(0 12px 24px rgba(0,0,0,.25));pointer-events:none}
 
@@ -82,35 +81,6 @@
     .mini{display:grid;grid-template-columns:1fr 1fr;gap:22px}
     @media (max-width:840px){.mini{grid-template-columns:1fr}}
 
-    .rsvp-wrap{margin-top:34px}
-    .rsvp{background:linear-gradient(180deg,var(--olive-light-1) 0%,var(--olive-light-2) 100%);color:#f7f2d2;padding:1.8rem;border-radius:20px;box-shadow:0 18px 48px rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.08)}
-    .rsvp h3{text-align:center;font-family:"DMSerifDisplay",serif;font-style:italic;font-weight:400;color:var(--title-gold);margin:.2rem 0 .5rem;letter-spacing:.2px}
-    .hint{text-align:center;color:#fff3cc;font-size:.95rem;opacity:.95;font-family:"DMSerifDisplay",serif;font-style:italic;margin:.1rem 0 1.1rem}
-
-    form .row{display:grid;gap:16px;grid-template-columns:1fr 1fr}
-    @media (max-width:680px){form .row{grid-template-columns:1fr}}
-    label{display:block;font-weight:800;margin-bottom:.4rem;letter-spacing:.2px;color:#fff3cc}
-    input[type="text"]{width:100%;padding:.9rem 1rem;border-radius:12px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.25);font-family:"Nomixa",system-ui}
-
-    .radio{display:flex;align-items:center;gap:24px;padding:.6rem 0 1.05rem;line-height:1.2;color:#fff}
-    .radio > span{margin-right:8px;opacity:.98}
-    .radio label{display:inline-flex;align-items:center;gap:8px;font-weight:700}
-
-    .submit{display:block;margin:20px auto 8px;width:min(520px,92%);padding:1rem 1.2rem;border-radius:12px;background:#d9bd24;color:#fff;border:none;box-shadow:0 1px 0 rgba(0,0,0,.35) inset,0 10px 22px rgba(0,0,0,.18);font-weight:800;letter-spacing:.2px;cursor:pointer}
-    .submit:hover{filter:brightness(1.03)}
-
-    /* Stepper */
-    .stepper{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:6px;margin:0 auto}
-    .stepper button{width:40px;height:40px;border:0;border-radius:12px;cursor:pointer;background:#fff;color:#2b2b2b;font-weight:900;font-size:20px;box-shadow:0 1px 0 rgba(0,0,0,.05) inset;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
-    .stepper input[type="number"]{width:72px;text-align:center;font-weight:900;font-size:18px;color:#2b2b2b;background:#fff;border:0;border-radius:12px;padding:.6rem .4rem;-moz-appearance:textfield}
-    .stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-
-    /* 👉 Alineación del stepper en DESKTOP: centrado dentro de la 2ª columna */
-    @media (min-width:681px){
-      .row > div:last-child{display:flex;flex-direction:column;align-items:center}
-      .row > div:last-child .stepper{margin:0}
-    }
-
     footer{display:none}
     .card.gift{background:#a99012;color:#f9edbd}
     .card.gift h3{color:#f1d86a;margin:.2rem 0 1rem}
@@ -120,30 +90,19 @@
     .card.gift .holder{color:#e9d98a;font-style:italic}
     .card.gift .action{color:#e9efc6}
 
-    .rsvp-wrap{position:relative;z-index:3}
-    .rsvp{box-shadow:0 22px 40px rgba(0,0,0,.35),0 2px 0 rgba(255,255,255,.12) inset}
-
-    .footer-hero{position:relative;z-index:1;margin-top:-180px;padding:220px 0 0;background:url('bg_footer_full.webp') top center/cover no-repeat;overflow:hidden;min-height:640px}
+    /* ======= FOOTER corregido (no tapa las cards) ======= */
+    .footer-hero{
+      position:relative;
+      z-index:0;          /* detrás de .cards */
+      margin-top:0;       /* antes era -180px */
+      padding:220px 0 0;  /* mantiene la “panza” dorada sin invadir arriba */
+      background:url('bg_footer_full.webp') top center/cover no-repeat;
+      overflow:hidden;
+      min-height:640px;
+    }
     .footer-hero .big50img{display:none!important}
     .footer-hero .back-top{position:relative;display:block;padding:8px 0 24px;text-align:center;color:#f6f0cf;font-weight:700;text-decoration:none;font-size:1rem;opacity:.95;cursor:pointer}
     .footer-hero .back-top:hover{opacity:1;text-decoration:underline}
-
-    /* ======= MOBILE ======= */
-    @media (max-width:560px){
-      .countdown{position:static;margin:12px auto 8px;border-radius:24px;padding:10px 12px}
-      .cd-grid{gap:8px}.cd-num{font-size:1.25rem}.cd-sep{height:24px}
-      .polaroid{position:static;transform:none;width:min(380px,82vw);margin:10px auto 6px;z-index:4}
-      header.hero{min-height:unset}
-      .hero .inner{padding-top:.4rem}
-      .title-img{width:min(540px,88%)}
-      .secret{font-size:1rem}
-      .glob-left,.glob-right{top:40%;width:clamp(90px,26vw,130px);transform:translateY(-50%);z-index:3}
-      .glob-left{left:-6vw}.glob-right{right:-6vw}
-    }
-
-    @media (max-width:380px){
-      .glob-left,.glob-right{top:36%;width:clamp(80px,28vw,118px)}
-    }
 
     /* Toast */
     .toast{position:fixed;left:50%;transform:translateX(-50%) translateY(20px);bottom:22px;background:#28221a;color:#f8f2d0;padding:10px 14px;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .28s ease,transform .28s ease;font-weight:800;letter-spacing:.2px;z-index:9999}
@@ -240,50 +199,6 @@
     </div>
   </section>
 
-  <!-- =================== ASISTENCIA =================== -->
-  <div class="container" id="rsvp">
-    <div class="rsvp-wrap">
-      <section class="rsvp">
-        <h3>Asistencia</h3>
-        <p class="hint">Confirmá tu asistencia antes del <strong>15 de octubre</strong></p>
-
-        <form id="rsvpForm" action="https://docs.google.com/forms/d/e/1FAIpQLScQHpPU0iYqd6bCsbHqCa_R-Kx_lEen3FBgNmoVlFC1mYR0LA/formResponse" method="POST" target="_self" novalidate>
-          <div class="row">
-            <div>
-              <label for="nombre">Nombre*</label>
-              <input id="nombre" name="entry.1788264235" type="text" required placeholder="Tu nombre" autocomplete="given-name" pattern=".*\\S.*"/>
-            </div>
-            <div>
-              <label for="apellido">Apellido*</label>
-              <input id="apellido" name="entry.1367845071" type="text" required placeholder="Tu apellido" autocomplete="family-name" pattern=".*\\S.*"/>
-            </div>
-          </div>
-
-          <div class="row">
-            <div>
-              <div class="radio" role="radiogroup" aria-label="¿Venís?">
-                <span>¿Venís?</span>
-                <label><input type="radio" name="entry.501006349" value="Si" required checked> Estoy :)</label>
-                <label><input type="radio" name="entry.501006349" value="No"> No puedo :(</label>
-              </div>
-            </div>
-            <div>
-              <label for="extras">¿Cuántas personas más vienen con vos?</label>
-              <div class="stepper" data-min="0" data-max="5">
-                <button type="button" class="dec" aria-label="Restar">−</button>
-                <input id="extras" name="entry.2142209110" type="number" inputmode="numeric" min="0" max="5" step="1" value="0"/>
-                <button type="button" class="inc" aria-label="Sumar">+</button>
-              </div>
-            </div>
-          </div>
-
-          <button class="btn submit" type="submit">Confirmar asistencia</button>
-        </form>
-
-      </section>
-    </div>
-  </div>
-
   <!-- =================== BLOQUE FINAL =================== -->
   <section class="footer-hero" aria-label="Decoración 50 años">
     <div class="container"><img class="big50img" src="footer_img.webp" alt="50"></div>
@@ -294,7 +209,17 @@
   <div id="toast" class="toast" role="status" aria-live="polite">CBU copiado</div>
 
   <script>
-    const CONFIG={event:{title:"Cumple sorpresa 50",start:"2025-10-18T20:45:00",end:"2025-10-18T23:59:00",whereText:"Salón MG, Lamadrid 2778, Las Heras",mapsLink:"https://www.google.com/maps/search/?api=1&query=Lamadrid+2778+Las+Heras",description:"¡Sorpresa! No metas la pata 🙊🙈🙉"},money:{alias:"cumpleflaca50",cbu:"4530000800015887372942"}};
+    const CONFIG={
+      event:{
+        title:"Cumple sorpresa 50",
+        start:"2025-10-18T20:45:00",
+        end:"2025-10-18T23:59:00",
+        whereText:"Salón MG, Lamadrid 2778, Las Heras",
+        mapsLink:"https://www.google.com/maps/search/?api=1&query=Lamadrid+2778+Las+Heras",
+        description:"¡Sorpresa! No metas la pata 🙊🙈🙉"
+      },
+      money:{alias:"cumpleflaca50",cbu:"4530000800015887372942"}
+    };
 
     // Links dinámicos
     document.getElementById("mapsLink").href=CONFIG.event.mapsLink;
@@ -304,23 +229,47 @@
     // Copiar CBU con toast
     const toast=document.getElementById("toast");
     function showToast(m="CBU copiado"){toast.textContent=m;toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),1800)}
-    document.getElementById("copyCbuBtn").addEventListener("click",async e=>{e.preventDefault();try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(CONFIG.money.cbu);showToast("CBU copiado ✔")}else{const t=document.createElement("textarea");t.value=CONFIG.money.cbu;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove();showToast("CBU copiado ✔")}}catch(err){showToast("No se pudo copiar 😕")}});
+    document.getElementById("copyCbuBtn").addEventListener("click",async e=>{
+      e.preventDefault();
+      try{
+        if(navigator.clipboard?.writeText){
+          await navigator.clipboard.writeText(CONFIG.money.cbu);
+          showToast("CBU copiado ✔");
+        }else{
+          const t=document.createElement("textarea");
+          t.value=CONFIG.money.cbu;
+          document.body.appendChild(t);
+          t.select();
+          document.execCommand("copy");
+          t.remove();
+          showToast("CBU copiado ✔");
+        }
+      }catch(err){
+        showToast("No se pudo copiar 😕");
+      }
+    });
 
     // Countdown
     const target=new Date(CONFIG.event.start);
-    const elD=document.getElementById("cd-days"),elH=document.getElementById("cd-hours"),elM=document.getElementById("cd-mins"),elS=document.getElementById("cd-secs");
+    const elD=document.getElementById("cd-days"),
+          elH=document.getElementById("cd-hours"),
+          elM=document.getElementById("cd-mins"),
+          elS=document.getElementById("cd-secs");
     const pad=n=>n.toString().padStart(2,"0");
-    function tick(){const now=new Date();let diff=Math.max(0,target-now);const sec=Math.floor(diff/1000)%60,min=Math.floor(diff/(1000*60))%60,hrs=Math.floor(diff/(1000*60*60))%24,days=Math.floor(diff/(1000*60*60*24));elD.textContent=days;elH.textContent=pad(hrs);elM.textContent=pad(min);elS.textContent=pad(sec)}
-    tick();setInterval(tick,1000);
-
-    // Validaciones
-    const form=document.getElementById("rsvpForm");const nombre=document.getElementById("nombre");const apellido=document.getElementById("apellido");
-    const validateNotBlank=(el,label)=>{const v=(el.value||"").trim();if(!v){el.setCustomValidity(`Ingresá tu ${label}.`);return false}el.setCustomValidity("");return true};
-    ["input","blur"].forEach(evt=>{nombre.addEventListener(evt,()=>validateNotBlank(nombre,"nombre"));apellido.addEventListener(evt,()=>validateNotBlank(apellido,"apellido"))});
-
-    // Stepper
-     (()=>{const w=document.querySelector(".stepper"),inc=w.querySelector(".inc"),dec=w.querySelector(".dec"),input=w.querySelector("input[type='number']");const min=parseInt(w.dataset.min||input.min||"0",10),max=parseInt(w.dataset.max||input.max||"5",10);const clamp=v=>Math.min(max,Math.max(min,v));const set=v=>{input.value=clamp(v)};inc.addEventListener("click",()=>set(parseInt(input.value||"0",10)+1));dec.addEventListener("click",()=>set(parseInt(input.value||"0",10)-1));input.addEventListener("input",()=>set(parseInt(input.value||"0",10)));set(parseInt(input.value||"0",10))})();
-    form.addEventListener("submit",e=>{nombre.value=(nombre.value||"").trim();apellido.value=(apellido.value||"").trim();const okN=validateNotBlank(nombre,"nombre"),okA=validateNotBlank(apellido,"apellido");if(!okN||!okA){e.preventDefault();form.reportValidity()}});
+    function tick(){
+      const now=new Date();
+      const diff=Math.max(0, target-now);
+      const sec=Math.floor(diff/1000)%60;
+      const min=Math.floor(diff/(1000*60))%60;
+      const hrs=Math.floor(diff/(1000*60*60))%24;
+      const days=Math.floor(diff/(1000*60*60*24));
+      elD.textContent=days;
+      elH.textContent=pad(hrs);
+      elM.textContent=pad(min);
+      elS.textContent=pad(sec);
+    }
+    tick();
+    setInterval(tick,1000);
   </script>
 </body>
 </html>
